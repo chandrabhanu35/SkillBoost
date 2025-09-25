@@ -141,3 +141,68 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Made with ❤️ for students who want to excel**
+
+---
+
+## 🔐 Authentication & Database Setup
+
+This project uses NextAuth (Google, GitHub, and Credentials) with Prisma + Postgres.
+
+### 1) Environment Variables
+Create `.env` from `.env.example` and fill in the values:
+
+```
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-strong-secret
+
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/skillboost?schema=public
+
+GOOGLE_CLIENT_ID=...
+GOOGLE_CLIENT_SECRET=...
+GITHUB_ID=...
+GITHUB_SECRET=...
+```
+
+Note: `.env.example` is committed; `.env` is ignored by git.
+
+### 2) Install Packages
+
+```
+npm i next-auth @next-auth/prisma-adapter bcrypt zod react-hook-form @hookform/resolvers @prisma/client
+npm i -D prisma @types/bcrypt
+```
+
+### 3) Prisma
+
+- Schema: `prisma/schema.prisma`
+- Generated client output: `app/generated/prisma` (gitignored)
+
+Run migrations (requires `DATABASE_URL`):
+
+```
+npx prisma migrate dev -n "init_auth"
+```
+
+### 4) Run the App
+
+```
+npm run dev
+```
+
+Open http://localhost:3000 and test:
+
+- `/login`: Google, GitHub, and email/password login
+- `/register`: Creates credentials user via `/api/register`
+- `/dashboard`: Protected; redirects to `/login` when unauthenticated
+
+### 5) Auth-aware Header
+
+`app/components/Header.tsx` shows Login/Register when logged out, and Dashboard/Sign out when logged in.
+
+### 6) API Routes
+
+- NextAuth: `app/api/auth/[...nextauth]/route.ts`
+- Registration: `app/api/register/route.ts`
+
+If Google/GitHub OAuth credentials are not provided, the buttons will attempt to sign in but you won’t complete the flow until keys are set.
+

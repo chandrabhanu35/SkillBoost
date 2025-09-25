@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <header className="w-full border-b border-gray-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 sticky top-0 z-40">
@@ -22,7 +24,22 @@ export default function Header() {
           <Link href="#features" className="hover:text-accent">Features</Link>
           <Link href="#pricing" className="hover:text-accent">Pricing</Link>
           <Link href="#contact" className="hover:text-accent">Contact</Link>
-          <Link href="/register" className="inline-flex items-center rounded-md bg-accent px-5 py-2.5 font-semibold text-white shadow hover:shadow-md transition-shadow">Get Started</Link>
+          {session ? (
+            <>
+              <Link href="/dashboard" className="hover:text-accent">Dashboard</Link>
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="inline-flex items-center rounded-md border border-primary px-5 py-2.5 font-semibold text-primary bg-white hover:bg-[#F8F9FA]"
+              >
+                Sign out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link href="/login" className="hover:text-accent">Login</Link>
+              <Link href="/register" className="inline-flex items-center rounded-md bg-accent px-5 py-2.5 font-semibold text-white shadow hover:shadow-md transition-shadow">Get Started</Link>
+            </>
+          )}
         </nav>
 
         {/* Mobile Menu Button */}
@@ -63,7 +80,22 @@ export default function Header() {
               <Link href="#features" onClick={() => setOpen(false)} className="hover:text-accent">Features</Link>
               <Link href="#pricing" onClick={() => setOpen(false)} className="hover:text-accent">Pricing</Link>
               <Link href="#contact" onClick={() => setOpen(false)} className="hover:text-accent">Contact</Link>
-              <Link href="/register" onClick={() => setOpen(false)} className="mt-2 inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 font-semibold text-white shadow hover:shadow-md">Get Started</Link>
+              {session ? (
+                <>
+                  <Link href="/dashboard" onClick={() => setOpen(false)} className="hover:text-accent">Dashboard</Link>
+                  <button
+                    onClick={() => { setOpen(false); signOut({ callbackUrl: "/" }); }}
+                    className="mt-2 inline-flex items-center justify-center rounded-md border border-primary text-primary px-4 py-2 font-semibold bg-white hover:bg-[#F8F9FA]"
+                  >
+                    Sign out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link href="/login" onClick={() => setOpen(false)} className="hover:text-accent">Login</Link>
+                  <Link href="/register" onClick={() => setOpen(false)} className="mt-2 inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 font-semibold text-white shadow hover:shadow-md">Get Started</Link>
+                </>
+              )}
             </nav>
           </div>
         </div>
