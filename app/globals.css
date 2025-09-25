@@ -13,15 +13,27 @@
 
 /* CSS Custom Properties for Light Theme */
 :root {
-  --background: #ffffff; /* Primary background color (white) */
-  --foreground: #171717; /* Primary text color (dark gray) */
+  /* Corporate-Academic Palette */
+  --color-primary: #003366; /* Dark Blue */
+  --color-accent: #0077CC;  /* Vibrant Blue */
+  --background: #FFFFFF;    /* White */
+  --foreground: #333333;    /* Gray text */
+
+  /* Typography */
+  --font-heading: var(--font-heading); /* Montserrat (from next/font) */
+  --font-body: var(--font-body);       /* Open Sans (from next/font) */
 }
 
 /* Tailwind CSS theme configuration using CSS variables */
 @theme inline {
+  /* Colors */
   --color-background: var(--background); /* Map to Tailwind's background utilities */
   --color-foreground: var(--foreground); /* Map to Tailwind's text utilities */
-  --font-sans: var(--font-geist-sans); /* Primary sans-serif font family */
+  --color-primary: var(--color-primary);
+  --color-accent: var(--color-accent);
+
+  /* Fonts */
+  --font-sans: var(--font-body); /* Use Open Sans for base text */
   --font-mono: var(--font-geist-mono); /* Monospace font for code */
 }
 
@@ -37,5 +49,18 @@
 body {
   background: var(--background); /* Apply theme background color */
   color: var(--foreground); /* Apply theme text color */
-  font-family: Arial, Helvetica, sans-serif; /* Fallback font stack */
+  font-family: var(--font-body), Arial, Helvetica, sans-serif; /* Open Sans with fallbacks */
 }
+
+/* Utility class for headings with Montserrat */
+.font-heading {
+  font-family: var(--font-heading), Arial, Helvetica, sans-serif;
+}
+
+/* Color helpers for convenience */
+.text-primary { color: var(--color-primary); }
+.bg-primary { background-color: var(--color-primary); }
+.border-primary { border-color: var(--color-primary); }
+.text-accent { color: var(--color-accent); }
+.bg-accent { background-color: var(--color-accent); }
+.border-accent { border-color: var(--color-accent); }

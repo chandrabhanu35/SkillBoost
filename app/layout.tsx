@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
 
 /**
@@ -24,6 +25,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"], // Load only Latin characters for performance
 });
 
+// Corporate-Academic Fonts
+const montserrat = Montserrat({
+  variable: "--font-heading",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400","500","600","700","800"],
+});
+
+const openSans = Open_Sans({
+  variable: "--font-body",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400","500","600","700"],
+});
+
 // Application metadata for SEO and social sharing
 export const metadata: Metadata = {
   title: "SkillBoost", // Page title shown in browser tab
@@ -45,7 +61,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${openSans.variable} antialiased`}
       >
         {children}
       </body>
