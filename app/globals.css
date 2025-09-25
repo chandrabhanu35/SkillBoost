@@ -1,0 +1,41 @@
+/**
+ * Global Styles for SkillBoost Application
+ * 
+ * This file contains:
+ * - Tailwind CSS imports
+ * - CSS custom properties (variables) for theming
+ * - Global styling for consistent design system
+ * - Dark mode support via prefers-color-scheme
+ */
+
+/* Import Tailwind CSS utilities and components */
+@import "tailwindcss";
+
+/* CSS Custom Properties for Light Theme */
+:root {
+  --background: #ffffff; /* Primary background color (white) */
+  --foreground: #171717; /* Primary text color (dark gray) */
+}
+
+/* Tailwind CSS theme configuration using CSS variables */
+@theme inline {
+  --color-background: var(--background); /* Map to Tailwind's background utilities */
+  --color-foreground: var(--foreground); /* Map to Tailwind's text utilities */
+  --font-sans: var(--font-geist-sans); /* Primary sans-serif font family */
+  --font-mono: var(--font-geist-mono); /* Monospace font for code */
+}
+
+/* Dark Mode Support - Automatically applied when user prefers dark theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a; /* Dark background color */
+    --foreground: #ededed; /* Light text color for dark mode */
+  }
+}
+
+/* Global body styling */
+body {
+  background: var(--background); /* Apply theme background color */
+  color: var(--foreground); /* Apply theme text color */
+  font-family: Arial, Helvetica, sans-serif; /* Fallback font stack */
+}
