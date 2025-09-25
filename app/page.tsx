@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import Header from "./components/Header";
 
 /**
  * Home Page Component
@@ -15,30 +17,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white text-[#333333] flex flex-col">
       {/* Header */}
-      <header className="w-full border-b border-gray-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 sticky top-0 z-40">
-        <div className="mx-auto max-w-7xl px-10 h-16 flex items-center justify-between">
-          {/* Left: Logo placeholder */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded bg-primary" aria-hidden />
-            <span className="text-xl font-heading font-semibold tracking-tight text-primary">SkillBoost</span>
-          </Link>
-          {/* Right: Navigation */}
-          <nav className="hidden md:flex items-center gap-8 text-sm">
-            <Link href="#" className="hover:text-accent">Home</Link>
-            <Link href="#about" className="hover:text-accent">About</Link>
-            <Link href="#features" className="hover:text-accent">Features</Link>
-            <Link href="#pricing" className="hover:text-accent">Pricing</Link>
-            <Link href="#contact" className="hover:text-accent">Contact</Link>
-            <Link href="/register" className="inline-flex items-center rounded-md bg-accent px-5 py-2.5 font-semibold text-white shadow hover:shadow-md transition-shadow">Get Started</Link>
-          </nav>
-          {/* Mobile menu button (placeholder) */}
-          <button className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded border border-gray-300" aria-label="Open Menu">
-            <span className="block h-0.5 w-5 bg-gray-700 mb-1" />
-            <span className="block h-0.5 w-5 bg-gray-700 mb-1" />
-            <span className="block h-0.5 w-5 bg-gray-700" />
-          </button>
-        </div>
-      </header>
+      <Header />
 
       <main className="flex-1">
         {/* Hero */}
@@ -55,12 +34,10 @@ export default function Home() {
               <Link href="#" className="inline-flex items-center justify-center rounded-md border border-primary text-primary px-6 py-3 text-sm font-semibold bg-white hover:bg-[#F8F9FA]">See Demo</Link>
             </div>
           </div>
-          {/* Right illustration placeholder */}
+          {/* Right illustration */}
           <div className="col-span-12 lg:col-span-6">
-            <div className="relative w-full h-64 sm:h-80 lg:h-[420px] rounded-2xl bg-gradient-to-br from-[#F0F6FF] to-[#E6F0FA] border border-blue-200">
-              <div className="absolute inset-6 rounded-xl border-2 border-dashed border-blue-300/70 flex items-center justify-center text-blue-600">
-                <span className="text-sm">Illustration Placeholder (Digital Learning Theme)</span>
-              </div>
+            <div className="relative w-full h-64 sm:h-80 lg:h-[420px] rounded-2xl bg-gradient-to-br from-[#F0F6FF] to-[#E6F0FA] border border-blue-200 flex items-center justify-center">
+              <Image src="/illustrations/hero-learning.svg" alt="Digital learning illustration" width={560} height={360} className="w-auto h-[70%]" />
             </div>
           </div>
         </section>
@@ -73,14 +50,14 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-12 gap-6">
             {[
-              { title: "Personalized Learning Paths" },
-              { title: "Reasoning & Critical Thinking" },
-              { title: "Interactive Tests & Assessments" },
-              { title: "Progress Tracking & Reports" },
+              { title: "Personalized Learning Paths", icon: "/icons/personalized.svg" },
+              { title: "Reasoning & Critical Thinking", icon: "/icons/reasoning.svg" },
+              { title: "Interactive Tests & Assessments", icon: "/icons/interactive.svg" },
+              { title: "Progress Tracking & Reports", icon: "/icons/interactive.svg" },
             ].map((f, i) => (
               <div key={i} className="col-span-12 sm:col-span-6 lg:col-span-3 rounded-xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition">
                 <div className="h-12 w-12 rounded-full bg-accent/15 text-accent flex items-center justify-center mb-4 border border-accent/20" aria-hidden>
-                  <span className="text-xs">Icon</span>
+                  <Image src={f.icon} alt="" width={24} height={24} />
                 </div>
                 <h4 className="font-heading text-[20px] font-semibold text-[#222]">{f.title}</h4>
                 <p className="mt-2 text-[16px] leading-7 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis orci.</p>
@@ -144,7 +121,7 @@ export default function Home() {
                 <ul className="mt-4 space-y-2 text-[15px] text-gray-700 text-left max-w-xs mx-auto">
                   {p.features.map((f, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <span className="mt-1 h-2 w-2 rounded-full bg-accent" />
+                      <Image src="/icons/check.svg" alt="" width={16} height={16} className="mt-1" />
                       <span>{f}</span>
                     </li>
                   ))}
