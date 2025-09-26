@@ -54,95 +54,73 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen w-full bg-[#F8F9FA] flex items-start sm:items-center justify-center px-4 py-10">
-      <div className="w-full max-w-xl">
-        <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-[0_8px_24px_rgba(0,0,0,0.06)]">
-          {/* Header */}
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="font-heading text-2xl sm:text-3xl font-semibold text-primary">Welcome to SkillBoost</h1>
-              <p className="mt-1 text-sm sm:text-base text-gray-600">Sign in or create your account to continue</p>
-            </div>
-          </div>
-
-          {/* Tabs */}
-          <div className="mt-4 grid grid-cols-2 gap-3">
-            <button className="inline-flex h-10 items-center justify-center rounded-md border border-gray-300 bg-white px-4 text-sm font-semibold shadow-inner">Sign in</button>
-            <Link href="/register" className="inline-flex h-10 items-center justify-center rounded-md border border-gray-300 bg-white px-4 text-sm font-semibold hover:bg-[#F8F9FA]">Create account</Link>
-          </div>
-
-          {/* OAuth */}
-          <div className="mt-5 grid gap-3">
-            <button
-              onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
-              className="inline-flex h-10 w-full items-center justify-start rounded-md border border-gray-200 bg-white px-4 text-sm font-semibold hover:bg-[#F8F9FA]"
-            >
-              <span className="mr-2 inline-flex h-4 w-4 items-center justify-center">
-                <img src="/icons/google.svg" alt="" className="h-4 w-4" />
-              </span>
-              Continue with Google
-              <span className="ml-auto text-xs text-gray-500">Recommended</span>
-            </button>
-            <button
-              onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
-              className="inline-flex h-10 w-full items-center justify-start rounded-md bg-[#0F172A] px-4 text-sm font-semibold text-white hover:opacity-95"
-            >
-              <span className="mr-2 inline-flex h-4 w-4 items-center justify-center text-white">
-                <img src="/icons/github.svg" alt="" className="h-4 w-4" />
-              </span>
-              Continue with GitHub
-            </button>
-          </div>
-
-          {/* Divider */}
-          <div className="my-6 flex items-center justify-center gap-4">
-            <span className="block h-px w-14 bg-gray-200" />
-            <span className="text-xs text-gray-500">Or continue with email</span>
-            <span className="block h-px w-14 bg-gray-200" />
-          </div>
-
-          {/* Form */}
-          <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-            <div>
-              <label className="block text-sm text-gray-700">Email</label>
-              <input
-                type="email"
-                {...register("email")}
-                className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
-                placeholder="you@university.edu"
-              />
-              {errors.email && (
-                <p className="mt-1 text-xs text-red-600">{errors.email.message as string}</p>
-              )}
-            </div>
-            <div>
-              <label className="block text-sm text-gray-700">Password</label>
-              <input
-                type="password"
-                {...register("password")}
-                className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
-                placeholder="••••••••"
-              />
-              {errors.password && (
-                <p className="mt-1 text-xs text-red-600">{errors.password.message as string}</p>
-              )}
-            </div>
-
-            {error && <p className="text-sm text-red-600">{error}</p>}
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="mt-1 inline-flex h-10 w-full items-center justify-center rounded-md bg-accent px-5 text-sm font-bold text-white shadow hover:shadow-md disabled:opacity-70"
-            >
-              {loading ? "Signing in..." : "Sign In"}
-            </button>
-          </form>
-
-          <p className="mt-5 text-sm text-gray-600">
-            Don&apos;t have an account? {" "}
-            <Link href="/register" className="text-accent hover:underline">Create one</Link>
-          </p>
+      <div className="w-full max-w-lg">
+        <div className="text-center mb-6">
+          <h1 className="font-heading text-2xl sm:text-3xl font-semibold text-[#111]">Log in or sign up</h1>
+          <p className="mt-1 text-sm sm:text-base text-gray-600">You’ll get smarter responses and can upload files, images, and more.</p>
         </div>
+
+        {/* Providers */}
+        <div className="grid gap-3">
+          <button
+            onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+            className="inline-flex h-11 w-full items-center justify-start rounded-full border border-gray-200 bg-white px-4 text-sm font-semibold hover:bg-[#F8F9FA]"
+          >
+            <img src="/icons/google.svg" alt="" className="mr-3 h-4 w-4" />
+            Continue with Google
+          </button>
+          <button
+            onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
+            className="inline-flex h-11 w-full items-center justify-start rounded-full bg-black px-4 text-sm font-semibold text-white hover:opacity-95"
+          >
+            <img src="/icons/github.svg" alt="" className="mr-3 h-4 w-4 invert" />
+            Continue with GitHub
+          </button>
+        </div>
+
+        {/* Divider */}
+        <div className="my-6 flex items-center justify-center gap-4">
+          <span className="block h-px w-12 bg-gray-200" />
+          <span className="text-xs text-gray-500">OR</span>
+          <span className="block h-px w-12 bg-gray-200" />
+        </div>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-3">
+          <input
+            type="email"
+            {...register("email")}
+            className="h-11 w-full rounded-full border border-gray-300 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+            placeholder="Email address"
+          />
+          {errors.email && (
+            <p className="-mt-2 text-xs text-red-600">{errors.email.message as string}</p>
+          )}
+          <input
+            type="password"
+            {...register("password")}
+            className="h-11 w-full rounded-full border border-gray-300 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+            placeholder="Password"
+          />
+          {errors.password && (
+            <p className="-mt-2 text-xs text-red-600">{errors.password.message as string}</p>
+          )}
+
+          {error && <p className="text-sm text-red-600">{error}</p>}
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="mt-1 inline-flex h-11 w-full items-center justify-center rounded-full bg-black px-6 text-sm font-semibold text-white hover:opacity-95 disabled:opacity-70"
+          >
+            {loading ? "Signing in..." : "Continue"}
+          </button>
+        </form>
+
+        <p className="mt-5 text-sm text-gray-600 text-center">
+          Don&apos;t have an account? {" "}
+          <Link href="/register" className="text-accent hover:underline">Create one</Link>
+        </p>
       </div>
     </div>
   );
