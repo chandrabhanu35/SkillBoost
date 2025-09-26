@@ -68,74 +68,85 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-[70vh] flex items-center justify-center px-6">
-      <div className="w-full max-w-md">
-        <h1 className="font-heading text-3xl font-semibold text-primary">Register</h1>
-        <p className="mt-2 text-gray-600">Create your SkillBoost account.</p>
+    <div className="min-h-screen w-full bg-[#F8F9FA] flex items-start sm:items-center justify-center px-4 py-10">
+      <div className="w-full max-w-lg">
+        <div className="text-center mb-6">
+          <h1 className="font-heading text-2xl sm:text-3xl font-semibold text-[#111]"><span className="text-primary">Create</span> your account</h1>
+          <p className="mt-1 text-sm sm:text-base text-gray-600">Start practicing with personalized insights</p>
+        </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="mt-6 grid gap-4">
-          <div>
-            <label className="block text-sm text-gray-700">Full Name</label>
-            <input
-              type="text"
-              {...register("name")}
-              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
-              placeholder="Jane Doe"
-            />
-            {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name.message as string}</p>}
-          </div>
-          <div>
-            <label className="block text-sm text-gray-700">Role</label>
-            <select
-              {...register("role")}
-              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent bg-white"
-              defaultValue="Student"
-            >
-              <option>Student</option>
-              <option>Professional</option>
-              <option>Professor</option>
-              <option>Institution Admin</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm text-gray-700">Email</label>
-            <input
-              type="email"
-              {...register("email")}
-              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
-              placeholder="you@example.com"
-            />
-            {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email.message as string}</p>}
-          </div>
-          <div>
-            <label className="block text-sm text-gray-700">Password</label>
-            <input
-              type="password"
-              {...register("password")}
-              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
-              placeholder="••••••••"
-            />
-            {errors.password && <p className="mt-1 text-xs text-red-600">{errors.password.message as string}</p>}
-          </div>
-          <div>
-            <label className="block text-sm text-gray-700">Confirm Password</label>
-            <input
-              type="password"
-              {...register("confirm")}
-              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
-              placeholder="••••••••"
-            />
-            {errors.confirm && <p className="mt-1 text-xs text-red-600">{errors.confirm.message as string}</p>}
-          </div>
+        {/* Social signups */}
+        <div className="grid gap-3">
+          <button className="inline-flex h-11 w-full items-center justify-start rounded-full border border-gray-200 bg-white px-4 text-sm font-semibold hover:bg-[#F8F9FA]">
+            <img src="/icons/google.svg" alt="" className="mr-3 h-4 w-4" />
+            Continue with Google
+          </button>
+          <button className="inline-flex h-11 w-full items-center justify-start rounded-full bg-black px-4 text-sm font-semibold text-white hover:opacity-95">
+            <img src="/icons/github.svg" alt="" className="mr-3 h-4 w-4 invert" />
+            Continue with GitHub
+          </button>
+        </div>
+
+        {/* Divider */}
+        <div className="my-6 flex items-center justify-center gap-4">
+          <span className="block h-px w-12 bg-gray-200" />
+          <span className="text-xs text-gray-500">OR</span>
+          <span className="block h-px w-12 bg-gray-200" />
+        </div>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
+          <input
+            type="text"
+            {...register("name")}
+            className="h-11 w-full rounded-full border border-gray-300 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+            placeholder="Full name"
+          />
+          {errors.name && <p className="-mt-2 text-xs text-red-600">{errors.name.message as string}</p>}
+
+          <select
+            {...register("role")}
+            className="h-11 w-full rounded-full border border-gray-300 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-accent bg-white"
+            defaultValue="Student"
+          >
+            <option>Student</option>
+            <option>Professional</option>
+            <option>Professor</option>
+            <option>Institution Admin</option>
+          </select>
+
+          <input
+            type="email"
+            {...register("email")}
+            className="h-11 w-full rounded-full border border-gray-300 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+            placeholder="Email address"
+          />
+          {errors.email && <p className="-mt-2 text-xs text-red-600">{errors.email.message as string}</p>}
+
+          <input
+            type="password"
+            {...register("password")}
+            className="h-11 w-full rounded-full border border-gray-300 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+            placeholder="Password"
+          />
+          {errors.password && <p className="-mt-2 text-xs text-red-600">{errors.password.message as string}</p>}
+
+          <input
+            type="password"
+            {...register("confirm")}
+            className="h-11 w-full rounded-full border border-gray-300 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+            placeholder="Confirm password"
+          />
+          {errors.confirm && <p className="-mt-2 text-xs text-red-600">{errors.confirm.message as string}</p>}
 
           {error && <p className="text-sm text-red-600">{error}</p>}
 
           <button
             type="submit"
             disabled={loading}
-            className="mt-2 inline-flex items-center justify-center rounded-md bg-accent px-5 py-2.5 text-sm font-bold text-white shadow hover:shadow-md disabled:opacity-70"
+            className="mt-1 inline-flex h-11 w-full items-center justify-center rounded-full bg-black px-6 text-sm font-semibold text-white hover:opacity-95 disabled:opacity-70"
           >
-            {loading ? "Creating account..." : "Create Account"}
+            {loading ? "Creating..." : "Create account"}
           </button>
         </form>
       </div>
